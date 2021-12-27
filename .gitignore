@@ -234,4 +234,4 @@ $RECYCLE.BIN/
 *_REMOTE_*.txt
 
 # MinIO cache
-.minio.sys
+datalake/.minio.sys/*
