@@ -110,6 +110,8 @@ Veja que no nosso **Overview** nós temos as *etapas* e *tecnologias* utilizadas
 
 ---
 
+<div id="tech"></div>
+
 ## Tecnologias (ferramentas) utilizadas
 
 Durante o desenvolvimento desse projeto foi utilizado as seguintes tecnologias (ferramentas):
