@@ -82,7 +82,7 @@ Veja que no nosso **Overview** nós temos as *etapas* e *tecnologias* utilizadas
 
 ## Processo (implementação) de ETL
 
-Antes de iniciar o *processo (implementação)* de **ETL (que foi implementada com Apache Airflow - DAGs)** foi feito um Pré-Processamento dos dados e modelagem dos dados.
+> Antes de iniciar o *processo (implementação)* de **ETL** foi feito um Pré-Processamento e modelagem dos dados.
 
 **NOTE:**  
 Você pode ver e entender esse processo clicando no seguinte **Jupyter Notebook**:
@@ -108,7 +108,7 @@ Essas DAGs já foram mapeadas com o nosso *Apache Airflow* na hora da criação 
 As **DAGs** foram enviadas automaticamente para o nosso container docker com Apache Airflow. Agora é só executar nossas DAGs para iniciar o processo de **ETL**.
 
 **NOTE:**  
-Vale salientar que a *DAG* [etl_employees_dataset.py](airflow/dags/etl_employees_dataset.py) é responsável por juntar todos os dados e concatenar todos eles. Por isso, ela deve ser a **antepenultima DAG a ser executada**. A última DAG a ser executada deve ser a [etl_time_in_company_att.py](airflow/dags/etl_time_in_company_att.py), pois ela depende do nosso dataset já concatenado com todas as inforamções.
+Vale salientar que a **DAG [etl_employees_dataset.py](airflow/dags/etl_employees_dataset.py)** é responsável por juntar e concatenar todos os dados. Por isso, ela deve ser a **última DAG a ser executada**.
 
 Outro ponto interessante aqui é que se você clica em uma DAG em execução (por exemplo: etl_mean_work_last_3_months_att.py) e clicar em **Graph View** você pode visualizar em qual tarefa sua DAG está:
 

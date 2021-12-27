@@ -1,10 +1,15 @@
-from datetime import datetime,date, timedelta
-from io import BytesIO
+###################################################################
+# Rodrigo Leite - drigols                                         #
+# Last update: 27/12/2021                                         #
+###################################################################
 
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.models import Variable
 from airflow import DAG
+
+from datetime import datetime,date, timedelta
+from io import BytesIO
 
 from sqlalchemy.engine import create_engine
 from minio import Minio
@@ -57,9 +62,9 @@ def extract():
   query = """SELECT hire_date
   FROM employees;"""
 
-  df_ = pd.read_sql_query(query,engine)
+  df_ = pd.read_sql_query(query, engine)
   
-  # Persiste os arquivos na área de Staging.
+  # Persiste os arquivos na Staging Area.
   df_.to_csv(
     "/tmp/time_in_company.csv",
     index=False
@@ -91,7 +96,7 @@ def transform():
   df_["time_in_company"] = nyears
 
   # Persiste os arquivos na área de Staging.
-  df_[["time_in_company"]].to_csv(
+  df_["time_in_company"].to_csv(
     "/tmp/time_in_company.csv",
     index = False
   )

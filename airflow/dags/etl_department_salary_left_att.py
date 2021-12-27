@@ -1,3 +1,8 @@
+###################################################################
+# Rodrigo Leite - drigols                                         #
+# Last update: 27/12/2021                                         #
+###################################################################
+
 from datetime import datetime,date, timedelta
 from io import BytesIO
 
@@ -58,7 +63,7 @@ url_connection = "mysql+pymysql://{}:{}@{}/{}".format(
 # Cria uma instânciada classe Engine, ou seja, conexão com o Banco de Dados.
 engine = create_engine(url_connection)
 
-# Cria uma instância do MinIO com os dados das variáveis acesso armazenadas no Airflow.
+# Cria uma instância do MinIO com os dados das variáveis de acesso armazenadas no Airflow.
 client = Minio(
   data_lake_server,
   access_key = data_lake_login,
@@ -66,6 +71,7 @@ client = Minio(
   secure=False
 )
 
+# ETL de extração dos dados.
 def extract():
 
   # Query para consultar os dados.
@@ -77,12 +83,13 @@ def extract():
   # Passa a query e conexão com o Banco de Dados.
   df_ = pd.read_sql_query(query, engine)
     
-  # Persiste os arquivos na área de Staging.
+  # Persiste os arquivos na Staging Area.
   df_.to_csv(
-     "/tmp/department_salary_left.csv",
-     index=False
+    "/tmp/department_salary_left.csv",
+    index=False
   )
 
+# ETL de carregamento dos dados.
 def load():
 
   # Carrega os dados a partir da área de staging.
@@ -97,7 +104,7 @@ def load():
 
   # Carrega os dados para o Data Lake.
   client.fput_object(
-    "processing", # Passa para a landing processing.
+    "processing", # Passa para a zona (butcket) processing.
     "department_salary_left.parquet",
     "/tmp/department_salary_left.parquet"
   )
@@ -118,8 +125,10 @@ load_task = PythonOperator(
 
 clean_task = BashOperator(
   task_id = "clean_files_on_staging",
+  # Remove os arquivos temporários da Stanging Area.
   bash_command = "rm -f /tmp/*.csv;rm -f /tmp/*.json;rm -f /tmp/*.parquet;",
   dag = dag
 )
 
+# Executa ETL > Sequência de tarefas.
 extract_task >> load_task >> clean_task

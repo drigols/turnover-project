@@ -1,12 +1,18 @@
-from datetime import datetime,date, timedelta
+###################################################################
+# Rodrigo Leite - drigols                                         #
+# Last update: 27/12/2021                                         #
+###################################################################
 
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.models import Variable
 from airflow import DAG
 
+from datetime import datetime,date, timedelta
+
 from minio import Minio
 import pandas as pd
+
 
 DEFAULT_ARGS = {
   'owner': 'Airflow',

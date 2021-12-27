@@ -1,18 +1,18 @@
 ###################################################################
-# Rodrigo Leite                                                   #
-# 13/12/2021                                                      #
+# Rodrigo Leite - drigols                                         #
+# Last update: 27/12/2021                                         #
 #                                                                 #
 # Script responsável por criar nosso Dataset.                     #
 # Ou seja, ele quem vai concatenar todos os arquivos de fontes    #
 # diferentes no mesmo Dataset.                                    #
 ###################################################################
 
-from datetime import datetime,date, timedelta
-
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.models import Variable
 from airflow import DAG
+
+from datetime import datetime,date, timedelta
 
 from minio import Minio
 import pandas as pd

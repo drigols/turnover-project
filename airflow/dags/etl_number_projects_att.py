@@ -1,10 +1,15 @@
-from datetime import datetime,date, timedelta
-from io import BytesIO
+###################################################################
+# Rodrigo Leite - drigols                                         #
+# Last update: 27/12/2021                                         #
+###################################################################
 
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.models import Variable
 from airflow import DAG
+
+from datetime import datetime,date, timedelta
+from io import BytesIO
 
 from sqlalchemy.engine import create_engine
 
@@ -59,7 +64,7 @@ def extract():
 
     df_ = pd.read_sql_query(query, engine)
     
-    # Persiste os arquivos na área de Staging.
+    # Persiste os arquivos na Staging Area.
     df_.to_csv(
       "/tmp/number_projects.csv",
       index = False
@@ -67,7 +72,7 @@ def extract():
 
 def load():
 
-  # Carrega os dados a partir da área de staging.
+  # Carrega os dados a partir da Staging Area.
   df_ = pd.read_csv("/tmp/number_projects.csv")
 
   # Converte os dados para o formato parquet.

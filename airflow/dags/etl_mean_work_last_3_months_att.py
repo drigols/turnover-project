@@ -1,13 +1,19 @@
-from io import BytesIO
-import datetime
+###################################################################
+# Rodrigo Leite - drigols                                         #
+# Last update: 27/12/2021                                         #
+###################################################################
 
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.models import Variable
 from airflow import DAG
 
+from io import BytesIO
+import datetime
+
 from minio import Minio
 import pandas as pd
+
 
 DEFAULT_ARGS = {
   'owner': 'Airflow',
@@ -35,10 +41,9 @@ client = Minio(
 def extract():
 
     # Cria a estrutura para o dataframe temporário.
-    df_working_hours = pd.DataFrame(data=None, columns=["emp_id","data","hora"])
+    df_working_hours = pd.DataFrame(data=None, columns=["emp_id", "data", "hora"])
     
     # list objects
-
     objects = client.list_objects(
       'landing',
       prefix = 'working-hours',
@@ -58,7 +63,7 @@ def extract():
       df_ = pd.read_excel(data)
       df_working_hours = pd.concat([df_working_hours,df_])
       
-    # Persiste o dataset na área de Staging.
+    # Persiste o dataset na Staging Area.
     df_working_hours.to_csv(
       "/tmp/mean_work_last_3_months.csv",
       index=False
@@ -66,7 +71,7 @@ def extract():
  
 def transform():
 
-  # Ler os dados a partir da área de Staging.
+  # Ler os dados a partir da Staging Area.
   df_ = pd.read_csv( "/tmp/mean_work_last_3_months.csv")
   
   # Converte os dados para o formato numeric e datetime.
@@ -112,7 +117,7 @@ extract_task = PythonOperator(
   task_id = 'extract_file_from_data_lake',
   provide_context = True,
   python_callable = extract,
-  dag=dag
+  dag = dag
 )
 
 transform_task = PythonOperator(
