@@ -2,14 +2,14 @@
 
 [![License MIT](res/license-MIT-blue.svg)](LICENSE.md)
 
-> O **Turnover Project** nos dar um feedback baseado em *Estatísticas* e uma modelagem de *Machine Learning* sobre quais funcionários podem deixam a empresa futuramente.
+> O **Turnover Project** nos dar um feedback baseado em *Estatísticas* e uma modelagem de *Machine Learning* sobre quais funcionários podem deixar a empresa futuramente.
 
 ## Visão geral sobre o Projeto
 
  - [Introdução & Problema](#intro-problem)
- - [Por onde começar?](#getting-started)
  - [De onde vem os dados?](#data-source)
  - [Overview da nossa solução](#overview)
+ - [Processo (implementação) de ETL](#etl-process)
  - [Tecnologias (ferramentas) utilizadas](#tech)
 
 ---
@@ -22,40 +22,14 @@ Bem, não sei se vocês já sabem, mas é muito *difícil (e caro)* uma empresa 
 
 > **Mas como impedir (ou tentar) que esses profissionais saiam da empresa?**
 
-**NOTE:**  
 Esse é o problema que nós vamos tentar resolver nesse projeto.
-
 
  - **Para resolver esse problema, nós vamos ter que responder várias questões como:**
    - Quais fatores influenciam para um colaborador deixar a empresa?
    - Como reter esses colaboradores?
    - Podemos nos antecipar e saber se um determinado colaborador vai sair (ou tentar) da empresa?
    - Como diminuir o **turnover**?
-     - **Turnover:** Turnover significa a taxa de rotatividade de colaboradores em uma empresa. Ou seja, o número de novos colaboradores comparado àqueles profissionais que deixam o ambiente de trabalho. Esse é um termo popular no setor de Recursos Humanos, relacionado com contratações e desligamentos de colaboradores.
-
----
-
-<div id="getting-started"></div>
-
-## Por onde começar?
-
-> Uma pergunta crucial na hora de iniciar em um projeto de **Data Science** é saber por onde começar.
-
-Vale salientar que esse começo muitas vezes vai ser voltado para o nosso problema. Por exemplo:
-
-> Vamos tentar responder com dados as perguntas do nosso problema.
-
- - **Quais fatores influenciam para um colaborador deixar a empresa?**
-   - Pessoa satisfeita?
-   - Ambiente de trabalho?
-   - Cargo, Departamento...
-   - Salário?
-   - Tempo na empresa?
- - **Podemos nos antecipar e saber se um determinado colaborador vai sair (ou tentar) da empresa?**
-   - Desempendo do colaborador.
-   - Carga de trabalho.
-   - Como diminuir o turnover?
-   - Como reter esses colaboradores?
+     - **Turnover:** Turnover significa a taxa de rotatividade de colaboradores em uma empresa. Ou seja, o número de novos colaboradores comparado àqueles profissionais que deixam o ambiente de trabalho.
 
 ---
 
@@ -63,23 +37,13 @@ Vale salientar que esse começo muitas vezes vai ser voltado para o nosso proble
 
 ## De onde vem os dados?
 
-Ok, é comum em um projeto real nos termos várias fontes de dados como:
-
- - Arquivos *.csv*;
- - Banco de Dados (SQL e NoSQL);
- - API (JSON);
- - Planilhas do Excel...
-
-**NOTE:**  
-Vejam que podem ser fontes e formatos bem distintos.
-
-### MySQL
+### 1° - MySQL
 
 Uma das fontes, onde, nós vamos pegar informações sobre os funcionários vai ser em um *Banco de Dados MySQL*. Algo parecido com isso:
 
 ![img](images/data-model-02.png)
 
-### Avaliação de desempenho dos funcionários (Formato JSON)
+### 2° - Avaliação de desempenho dos funcionários (Formato JSON)
 
 Outra fonte de dados para nós relacionada com os funcionários vai ser uma *avaliação* de uma empresa terceirizada que nós diz o nível de:
 
@@ -87,9 +51,13 @@ Outra fonte de dados para nós relacionada com os funcionários vai ser uma *ava
  - E também nós da uma avaliação geral sobre esse funcionário:
    - Ou seja, quão bem esse funcionário foi avaliado (em porcentagem).
 
-### Horas trabalhadas por dia para cada funcionário (Planilha Excel)
+Algo parecido com isso:
 
-E agora para as coisas ficarem ainda mais bonitas, imagine que a empresa tenha um sistema de ponto que salva (armazena) em um arquivo do *Excel* às horas trabalhadas de um funcionário por dia. Algo parecido com isso:
+![img](images/json-01.png)  
+
+### 3° - Horas trabalhadas por dia para cada funcionário (Planilha Excel)
+
+Por fim, uma das nossas fontes de dados é uma *planilha do Excel* que armazena dados referentes a horas trabalhadas por cada funcionário na empresa. Algo parecido com isso:
 
 ![img](images/excel-01.png)  
 
@@ -110,6 +78,48 @@ Veja que no nosso **Overview** nós temos as *etapas* e *tecnologias* utilizadas
 
 ---
 
+<div id="etl-process"></div>
+
+## Processo (implementação) de ETL
+
+Antes de iniciar o *processo (implementação)* de **ETL (que foi implementada com Apache Airflow - DAGs)** foi feito um Pré-Processamento dos dados e modelagem dos dados.
+
+**NOTE:**  
+Você pode ver e entender esse processo clicando no seguinte **Jupyter Notebook**:
+
+**[→ data_model.ipynb](notebooks/data_model.ipynb)**  
+
+Depois de pensado e planejado como seria implementadas nossas *DAGs* com *Apache Airflow* nós implementamos os seguintes códigos:
+
+**airflow/dags**  
+[etl_department_salary_left_att.py](airflow/dags/etl_department_salary_left_att.py)  
+[etl_employees_dataset.py](airflow/dags/etl_employees_dataset.py)  
+[etl_mean_work_last_3_months_att.py](airflow/dags/etl_mean_work_last_3_months_att.py)  
+[etl_number_projects_att.py](airflow/dags/etl_number_projects_att.py)  
+[etl_satisfaction_evaluation_att.py](airflow/dags/etl_satisfaction_evaluation_att.py)  
+[etl_time_in_company_att.py](airflow/dags/etl_time_in_company_att.py)  
+[etl_work_accident_att.py](airflow/dags/etl_work_accident_att.py)  
+
+**NOTE:**  
+Essas DAGs já foram mapeadas com o nosso *Apache Airflow* na hora da criação do container. Se você se conectar no Servidor Web do Apache Airflow terá o seguinte resultado:
+
+![img](images/dags-01.png)  
+
+As **DAGs** foram enviadas automaticamente para o nosso container docker com Apache Airflow. Agora é só executar nossas DAGs para iniciar o processo de **ETL**.
+
+**NOTE:**  
+Vale salientar que a *DAG* [etl_employees_dataset.py](airflow/dags/etl_employees_dataset.py) é responsável por juntar todos os dados e concatenar todos eles. Por isso, ela deve ser a **antepenultima DAG a ser executada**. A última DAG a ser executada deve ser a [etl_time_in_company_att.py](airflow/dags/etl_time_in_company_att.py), pois ela depende do nosso dataset já concatenado com todas as inforamções.
+
+Outro ponto interessante aqui é que se você clica em uma DAG em execução (por exemplo: etl_mean_work_last_3_months_att.py) e clicar em **Graph View** você pode visualizar em qual tarefa sua DAG está:
+
+![img](images/dags-02.png)  
+
+Visto que todas as **DAGs** obtiveram sucesso, todos os dados foram enviados para o *Data Lake (MinIO)* para a *zona (butcket)* processing:
+
+![img](images/minio-01.png)  
+
+---
+
 <div id="tech"></div>
 
 ## Tecnologias (ferramentas) utilizadas
@@ -117,7 +127,16 @@ Veja que no nosso **Overview** nós temos as *etapas* e *tecnologias* utilizadas
 Durante o desenvolvimento desse projeto foi utilizado as seguintes tecnologias (ferramentas):
 
  - **Docker com:**
-   - MySQL;
-   - MinIO;
-   - Apache Airflow.
+   - MySQL
+   - MinIO
+   - Apache Airflow
+ - **Jupyter Notebook**
+ - **Python com as seguintes bibliotecas:**
+   - PyMySQL
+   - Openpyxl
+   - Pandas
+   - Datetime
+   - Glob
+   - Math
+   - SQLAlchemy
  - **Streamlit para visualização da solução.**
