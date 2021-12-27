@@ -10,6 +10,7 @@
  - [Por onde começar?](#getting-started)
  - [De onde vem os dados?](#data-source)
  - [Overview da nossa solução](#overview)
+ - [Tecnologias (ferramentas) utilizadas](#tech)
 
 ---
 
@@ -108,3 +109,13 @@ A forma visual é quase sempre a melhor alternativa de visualização. O nosso *
 Veja que no nosso **Overview** nós temos as *etapas* e *tecnologias* utilizadas em cada etapa bem definidas.
 
 ---
+
+## Tecnologias (ferramentas) utilizadas
+
+Durante o desenvolvimento desse projeto foi utilizado as seguintes tecnologias (ferramentas):
+
+ - **Docker com:**
+   - MySQL;
+   - MinIO;
+   - Apache Airflow.
+ - **Streamlit para visualização da solução.**
