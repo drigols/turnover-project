@@ -10,6 +10,7 @@
  - [De onde vem os dados?](#data-source)
  - [Overview da nossa solução](#overview)
  - [Processo (implementação) de ETL](#etl-process)
+ - [Limpeza, Manipulação & Preparação dos Dados](#clean-prepare)
  - [Tecnologias (ferramentas) utilizadas](#tech)
 
 ---
@@ -120,6 +121,16 @@ Visto que todas as **DAGs** obtiveram sucesso, todos os dados foram enviados par
 
 ---
 
+<div id="clean-prepare"></div>
+
+# Limpeza, Manipulação & Preparação dos Dados
+
+Nessa etapa do projeto foi feita uma *limpeza*, *Manipulação & *Preparação* dos Dados*. Se você tiver interesse em *ver* e *entender* como foi feito esse processo, basta clicar na referência para o Jupyter Notebook abaixo:
+
+**[→ analysis.ipynb](notebooks/analysis.ipynb)**  
+
+---
+
 <div id="tech"></div>
 
 ## Tecnologias (ferramentas) utilizadas
@@ -139,4 +150,12 @@ Durante o desenvolvimento desse projeto foi utilizado as seguintes tecnologias (
    - Glob
    - Math
    - SQLAlchemy
+   - MinIO
+   - Fastparquet
+   - seaborn
+   - sweetviz
  - **Streamlit para visualização da solução.**
+
+---
+
+**Rodrigo Leite -** *drigols*
