@@ -11,6 +11,7 @@
  - [Overview da nossa solução](#overview)
  - [Processo (implementação) de ETL](#etl-process)
  - [Limpeza, Manipulação & Preparação dos Dados](#clean-prepare)
+ - [Processo de modelagem (Machine Learning)](#machine-learning)
  - [Tecnologias (ferramentas) utilizadas](#tech)
 
 ---
