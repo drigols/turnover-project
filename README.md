@@ -136,6 +136,26 @@ Lembrando que no fim dessa etapa foi enviado para a *zona (butcket)* **curated**
 
 ---
 
+<div id="machine-learning"></div>
+
+## Processo de modelagem (Machine Learning)
+
+Nessa etapa do projeto foi implementado e testado modelos de Machine Learning com a finalidade de descobrir qual se adequa melhor com o nosso conjunto de dados.
+
+Novamente, se você tiver interesse em *ver* e *entender* como foi feito esse processo, basta clicar na referência para o *Jupyter Notebook* abaixo:
+
+**[→ machine_learning_deploy.ipynb](notebooks/machine_learning_deploy.ipynb)**  
+
+**NOTE:**  
+Novamente, nós utilizamos nosso Data Lake (MinIO) para armazenar nosso modelo - zona (bucket) **curated**:
+
+![img](images/minio-02.png)  
+
+**NOTE**  
+Veja que além de enviarmos nosso modelo, nós também enviamos um dataset do nosso conjunto de dados pronto para produção.
+
+---
+
 <div id="tech"></div>
 
 ## Tecnologias (ferramentas) utilizadas
@@ -159,6 +179,8 @@ Durante o desenvolvimento desse projeto foi utilizado as seguintes tecnologias (
    - Fastparquet
    - seaborn
    - sweetviz
+   - Scikit-Learn
+   - Pycaret
  - **Streamlit para visualização da solução.**
 
 ---
