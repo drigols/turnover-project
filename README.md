@@ -121,13 +121,18 @@ Visto que todas as **DAGs** obtiveram sucesso, todos os dados foram enviados par
 
 ---
 
-<div id="clean-prepare"></div>
+<div id="preprocessing-data-analysis"></div>
 
-# Limpeza, Manipulação & Preparação dos Dados
+# Pré-Processamento & Análise dos Dados
 
-Nessa etapa do projeto foi feita uma *limpeza*, *Manipulação & *Preparação* dos Dados*. Se você tiver interesse em *ver* e *entender* como foi feito esse processo, basta clicar na referência para o Jupyter Notebook abaixo:
+Nessa etapa do projeto foi feito um **Pré-Processamento** & **Análise dos dados**. Se você tiver interesse em *ver* e *entender* como foi feito esse processo, basta clicar na referência para o *Jupyter Notebook* abaixo:
 
-**[→ analysis.ipynb](notebooks/analysis.ipynb)**  
+**[→ preprocessing-data-analysis.ipynb](notebooks/preprocessing-data-analysis.ipynb)**  
+
+**NOTE:**  
+Lembrando que no fim dessa etapa foi enviado para a *zona (butcket)* **curated** do nosso *Data Lake (MinIO)* um **Cluster** do nosso conjunto de dados:
+
+![img](images/cluster-01.png)
 
 ---
 
