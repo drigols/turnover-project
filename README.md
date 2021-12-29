@@ -12,7 +12,10 @@
  - [Processo (implementação) de ETL](#etl-process)
  - [Limpeza, Manipulação & Preparação dos Dados](#clean-prepare)
  - [Processo de modelagem (Machine Learning)](#machine-learning)
+ - [Apresentação da solução](#solution)
  - [Tecnologias (ferramentas) utilizadas](#tech)
+
+## 
 
 ---
 
@@ -154,6 +157,45 @@ Novamente, nós utilizamos nosso Data Lake (MinIO) para armazenar nosso modelo -
 
 **NOTE**  
 Veja que além de enviarmos nosso modelo, nós também enviamos um dataset do nosso conjunto de dados pronto para produção.
+
+---
+
+<div id="solution"></div>
+
+## Apresentação da solução
+
+Essa foi a etapa final do projeto, onde, foi desenvolvido uma Aplicação Web simples para demonstrar aos Stakeholders a nossa soluação. Essa Aplicação Web foi desenvolvida com a biblioteca [Streamlit](https://streamlit.io/).
+
+Se você tiver interesse em rodar essa aplicação basta seguir os seguintes passos:
+
+**Primeir, você deve baixar as dependências do projeto:**  
+```
+pip install --upgrade -r requirements.txt
+```
+
+**NOTE:**  
+É interessante você criar um Ambiente Virtual (Por exemplo, virtualenv) antes de baixar as dependências para evitar baixar bibliotecas que não vai utilizar posteriormente em sua máquina local.
+
+**Agora com as dependências (bibliotecas) baixadas é só ir para o diretório do script e executá-lo:**  
+```
+cd app
+python app.py
+```
+
+Se tudo ocorrer bem você será direcionado para a seguinte janela:
+
+![img](images/app-01.png)  
+
+Agora é só você preencher os seguintes campos que o modelo vai tentar prever se o funcionário vai ou não deixar a empresa:
+
+ - **satisfaction:**
+   - Quão satisfeito o funcionário está na empresa.
+ - **evaluation:**
+   - Desempenho (avaliação) do funcionário na empresa.
+ - **averageMonthlyHours:**
+   - Média de horas trabalhadas pelo funcionários nós últimos 3 meses.
+ - **yearsAtCompany:**
+   - Quantos anos (tempo) esse funcionário tem na empresa.
 
 ---
 
