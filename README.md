@@ -14,6 +14,7 @@
  - [Processo de modelagem (Machine Learning)](#machine-learning)
  - [Apresentação da solução](#solution)
  - [Tecnologias (ferramentas) utilizadas](#tech)
+ - [Créditos](#credit)
 
 ## 
 
@@ -225,6 +226,17 @@ Durante o desenvolvimento desse projeto foi utilizado as seguintes tecnologias (
    - Scikit-Learn
    - Pycaret
  - **Streamlit para visualização da solução.**
+
+---
+
+<div id="credit"></div>
+
+## Créditos
+
+Esse Projetos foi desenvolvido durante o **Bootcamp de Data Science (Outubro 2021)** do canal **[Stack](https://www.youtube.com/c/Stack_tecnologias/videos)** no *Youtube*.
+
+**NOTE:**  
+Eu utilizei algumas técnicas de outros estudos, porém, o problema a ser solucionado e pipelines foram todos créditos deles.
 
 ---
 
