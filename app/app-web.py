@@ -2,12 +2,14 @@ from pycaret.classification import load_model, predict_model
 import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
+import pickle
 import joblib
 
 
-model = load_model('my_model') # Da um load no nosso modelo com Pycaret.
+model = load_model("my_model") # Da um load no nosso modelo com Pycaret.
 model_cluster = joblib.load("cluster.joblib") # Da um load no nosso Cluster.
 dataset = pd.read_csv("dataset.csv") # Carregar nosso conjunto de dados.
+
 
 ########################## (Streamlit Main content) ##########################
 
